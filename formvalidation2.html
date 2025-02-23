@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    body {
+      background-color: rgb(127, 176, 190);
+      display: grid;
+      justify-content: right;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: rgba(206, 32, 174, 0.2);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      color: white;
+      width: 300px;
+    }
+    input, button {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    input {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    button {
+      background-color: white;
+      color: navy;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form action="#" id="form" onsubmit="return validateForm()">
+      <label for="firstname">First Name</label>
+      <input type="text" id="firstname" name="firstname" placeholder="First Name">
+      <span class="error" id="firstnameError"></span><br>
+
+      <label for="lastname">Last Name</label>
+      <input type="text" id="lastname" name="lastname" placeholder="Last Name">
+      <span class="error" id="lastnameError"></span><br>
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Email">
+      <span class="error" id="emailError"></span><br>
+      
+      <label for="phonenumber">Phone Number</label>
+      <input type="tel" id="phonenumber" name="phonenumber" placeholder="123-456-7890">
+      <span class="error" id="phoneError"></span><br>
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter Password">
+      <span class="error" id="passwordError"></span><br>
+      
+      <label for="confirmpassword">Confirm Password</label>
+      <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password">
+      <span class="error" id="confirmPasswordError"></span><br>
+      
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <script>
+    function validateForm() {
+      let isValid = true;
+      
+      let firstname = document.getElementById("firstname").value.trim();
+      if (firstname === "") {
+        document.getElementById('firstnameError').innerText = "First name is required";
+        isValid = false;
+      } else {
+        document.getElementById("firstnameError").innerText = "";
+      }
+      
+      let lastname = document.getElementById("lastname").value.trim();
+      if (lastname === "") {
+        document.getElementById('lastnameError').innerText = "Last name is required";
+        isValid = false;
+      } else {
+        document.getElementById("lastnameError").innerText = "";
+      }
+      
+      let email = document.getElementById("email").value.trim();
+      let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.match(emailPattern)) {
+        document.getElementById('emailError').innerText = "Enter a valid email";
+        isValid = false;
+      } else {
+        document.getElementById("emailError").innerText = "";
+      }
+      
+      let phone = document.getElementById("phonenumber").value.trim();
+      let phonePattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+      if (!phone.match(phonePattern)) {
+        document.getElementById('phoneError').innerText = "Enter a valid phone number (123-456-7890)";
+        isValid = false;
+      } else {
+        document.getElementById("phoneError").innerText = "";
+      }
+      
+      let password = document.getElementById("password").value.trim();
+      let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!password.match(passwordPattern)) {
+        document.getElementById('passwordError').innerText = "Password must be at least 8 characters long, include a capital letter, a small letter, a number, and a special character";
+        isValid = false;
+      } else {
+        document.getElementById("passwordError").innerText = "";
+      }
+      
+      let confirmPassword = document.getElementById("confirmpassword").value.trim();
+      if (confirmPassword !== password) {
+        document.getElementById('confirmPasswordError').innerText = "Passwords do not match";
+        isValid = false;
+      } else {
+        document.getElementById("confirmPasswordError").innerText = "";
+      }
+      
+      return isValid;
+    }
+  </script>
+</body>
+</html>

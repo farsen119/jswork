@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      margin: 0;
+      display:flex;
+      justify-content: center;
+      align-items:center;
+
+    }
+    #container{
+      max-width: 500px;
+      overflow: hidden;
+      border-radius: 15px;
+      background-color: rgb(67, 58, 75);
+
+
+    }
+    #display{
+      width: 100%;
+      padding: 20px;
+      font-size: 4rem;
+      text-align: left;
+      border: none;
+      background-color: rgb(93, 71, 114);
+
+    }
+
+    #keys{
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap:10px;
+      padding: 25px
+
+    }
+    #keys button:nth-child(16) { 
+    grid-row: span 2; 
+
+    /* height: 210px; */
+    height: 100%; 
+    }
+
+
+
+    button{
+      width: 100px;
+      height: 100px;
+      border: none;
+      background-color: blueviolet;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 2rem;
+      cursor: pointer;
+
+    }
+
+  </style>
+</head>
+<body>
+  <div id="container">
+    <input id="display" readonly>
+    <div id="keys">
+      <button onclick="appendToDispaly('+')">+</button>
+      <button onclick="appendToDispaly('1')">1</button>
+      <button onclick="appendToDispaly('2')">2</button>
+      <button onclick="appendToDispaly('3')">3</button>
+      <button onclick="appendToDispaly('-')">-</button>
+      <button onclick="appendToDispaly('4')">4</button>
+      <button onclick="appendToDispaly('5')">5</button>
+      <button onclick="appendToDispaly('6')">6</button>
+      <button onclick="appendToDispaly('*')">*</button>
+      <button onclick="appendToDispaly('7')">7</button>
+      <button onclick="appendToDispaly('8')">8</button>
+      <button onclick="appendToDispaly('9')">9</button>
+      <button onclick="appendToDispaly('/')">/</button>
+      <button onclick="appendToDispaly('.')">.</button>
+      <button onclick="appendToDispaly('0')">0</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="appendToDispaly('%')">%</button>
+      <button onclick="clearDisplay('AC')">AC</button>
+      <button onclick="deleteTo('C')">C</button>
+
+    </div>
+  </div>
+  <script>
+    const display=document.getElementById('display')
+
+    function appendToDispaly(input){
+      display.value += input;
+      
+    }
+
+
+    function calculate(){
+      try{
+        display.value = eval(display.value);
+
+      }
+      catch(error){
+        display.value= "Error"
+      }
+
+      
+    }
+    function clearDisplay(){
+      display.value = ""
+    }
+    function deleteTo() {
+    display.value = display.value.slice(0, -1);
+    }
+
+  </script>
+</body>
+</html>
